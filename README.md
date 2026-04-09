@@ -6,7 +6,7 @@
 
 ## 🔗 Ver sitio en vivo
 
-**[tapitas-proyecto.github.io](https://tuusuario.github.io/tapitas-proyecto/)**
+**[tapitas-proyecto.github.io](https://alvarolopezg-lang.github.io/TricroVisiOn.github.io/)**
 *(reemplaza el enlace con tu URL real de GitHub Pages)*
 
 ---
