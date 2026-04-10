@@ -3,26 +3,38 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sistema Automatizado de Clasificación de Tapitas</title>
+<title>Croma VisiOn — Proyecto de Innovación Tecnológica</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --bg: #080c10;
-  --surface: #0d1219;
-  --surface2: #121920;
-  --border: rgba(255,255,255,0.07);
-  --border2: rgba(255,255,255,0.12);
-  --text: #e8edf2;
-  --muted: #6b7a8d;
-  --accent: #00d4aa;
-  --accent2: #0099ff;
-  --accent-dim: rgba(0,212,170,0.12);
-  --accent2-dim: rgba(0,153,255,0.1);
-  --font-display: 'Syne', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
+  --bg:        #f7f9fc;
+  --surface:   #ffffff;
+  --surface2:  #f1f4f9;
+  --surface3:  #e8ecf4;
+  --border:    rgba(20,35,80,0.08);
+  --border2:   rgba(20,35,80,0.14);
+  --text:      #0d1526;
+  --muted:     #526080;
+  --muted2:    #8a95aa;
+  --accent:    #1d6af5;
+  --accent2:   #00c9a7;
+  --accent-dim:  rgba(29,106,245,0.07);
+  --accent2-dim: rgba(0,201,167,0.08);
+  --accent-mid:  rgba(29,106,245,0.15);
+  --shadow-sm: 0 1px 4px rgba(10,20,50,0.06), 0 4px 12px rgba(10,20,50,0.04);
+  --shadow-md: 0 4px 16px rgba(10,20,50,0.08), 0 12px 40px rgba(10,20,50,0.05);
+  --shadow-lg: 0 8px 32px rgba(10,20,50,0.10), 0 24px 64px rgba(10,20,50,0.06);
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body:    'Plus Jakarta Sans', sans-serif;
+  --max-width: 1280px;
+  /* RGB sutil */
+  --rgb-r: rgba(255,60,60,0.55);
+  --rgb-g: rgba(60,220,120,0.55);
+  --rgb-b: rgba(60,130,255,0.55);
 }
 
 html { scroll-behavior: smooth; }
@@ -36,7 +48,9 @@ body {
   overflow-x: hidden;
 }
 
-/* ── NAV ── */
+/* ════════════════════════════════
+   NAV
+   ════════════════════════════════ */
 nav {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -44,32 +58,32 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 48px;
-  height: 64px;
-  background: rgba(8,12,16,0.85);
+  padding: 0 56px;
+  height: 68px;
+  background: rgba(255,255,255,0.90);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
 }
 
 .nav-logo {
   font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 14px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--accent);
+  font-weight: 700;
+  font-size: 19px;
+  letter-spacing: -0.03em;
+  background: linear-gradient(130deg, var(--accent) 30%, var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.nav-links {
-  display: flex;
-  gap: 36px;
-  list-style: none;
-}
+.nav-logo span { font-weight: 400; }
+.nav-links { display: flex; gap: 36px; list-style: none; }
 
 .nav-links a {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
-  letter-spacing: 0.06em;
+  letter-spacing: -0.01em;
   color: var(--muted);
   text-decoration: none;
   transition: color 0.2s;
@@ -80,30 +94,30 @@ nav {
   content: '';
   position: absolute;
   bottom: -4px; left: 0;
-  width: 0; height: 1px;
+  width: 0; height: 2px;
   background: var(--accent);
+  border-radius: 2px;
   transition: width 0.3s;
 }
 
 .nav-links a:hover { color: var(--text); }
 .nav-links a:hover::after { width: 100%; }
-
 .nav-dropdown { position: relative; }
 
 .nav-dropdown-menu {
   position: absolute;
-  top: calc(100% + 16px);
+  top: calc(100% + 12px);
   left: 50%;
-  transform: translateX(-50%);
-  background: var(--surface2);
+  transform: translateX(-50%) translateY(-6px);
+  background: var(--surface);
   border: 1px solid var(--border2);
-  border-radius: 10px;
+  border-radius: 14px;
   padding: 8px;
-  min-width: 160px;
+  min-width: 210px;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s, transform 0.2s;
-  transform: translateX(-50%) translateY(-6px);
+  box-shadow: var(--shadow-md);
 }
 
 .nav-dropdown:hover .nav-dropdown-menu {
@@ -114,22 +128,23 @@ nav {
 
 .nav-dropdown-menu a {
   display: block;
-  padding: 8px 14px;
-  border-radius: 6px;
+  padding: 9px 14px;
+  border-radius: 8px;
   font-size: 13px;
+  font-weight: 500;
   color: var(--muted);
   text-decoration: none;
   transition: background 0.15s, color 0.15s;
 }
 
-.nav-dropdown-menu a:hover {
-  background: var(--accent-dim);
-  color: var(--accent);
-}
-
+.nav-dropdown-menu a:hover { background: var(--accent-dim); color: var(--accent); }
 .nav-dropdown-menu a::after { display: none; }
 
-/* ── HERO ── */
+/* ════════════════════════════════
+   HERO — Rediseño completo
+   Fondo oscuro con imagen tech + overlay
+   RGB sutil en el título
+   ════════════════════════════════ */
 #inicio {
   position: relative;
   min-height: 100vh;
@@ -137,116 +152,299 @@ nav {
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  /* NUEVO: fondo oscuro para el hero para mayor impacto */
+  background: #080d18;
 }
 
+/* NUEVO: Imagen de fondo tecnológica generada con SVG — circuito + cuadrícula */
+.hero-bg-img {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  /* Imagen de fondo: cuadrícula de circuito SVG inline como data URI */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Crect width='80' height='80' fill='none'/%3E%3Cpath d='M0 40h30M50 40h30M40 0v30M40 50v30' stroke='%2320304a' stroke-width='0.5'/%3E%3Ccircle cx='40' cy='40' r='3' fill='none' stroke='%2320304a' stroke-width='0.5'/%3E%3Ccircle cx='0' cy='0' r='1.5' fill='%2320304a'/%3E%3Ccircle cx='80' cy='0' r='1.5' fill='%2320304a'/%3E%3Ccircle cx='0' cy='80' r='1.5' fill='%2320304a'/%3E%3Ccircle cx='80' cy='80' r='1.5' fill='%2320304a'/%3E%3C/svg%3E");
+  background-size: 80px 80px;
+  opacity: 0.9;
+}
+
+/* NUEVO: Overlay de color con manchas RGB sutiles */
 .hero-bg {
   position: absolute;
   inset: 0;
+  z-index: 1;
   background:
-    radial-gradient(ellipse 60% 50% at 20% 50%, rgba(0,212,170,0.07) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 60% at 80% 30%, rgba(0,153,255,0.06) 0%, transparent 60%),
-    linear-gradient(180deg, #080c10 0%, #0a0f16 100%);
+    radial-gradient(ellipse 55% 50% at 10% 35%, rgba(255,50,50,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 45% 55% at 90% 20%, rgba(50,150,255,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 55% 80%, rgba(50,220,130,0.06) 0%, transparent 55%),
+    radial-gradient(ellipse 80% 60% at 50% 50%, rgba(8,13,24,0.92) 30%, rgba(8,13,24,0.6) 100%);
 }
 
+/* Cuadrícula tecnológica fina sobre el fondo oscuro */
 .hero-grid {
   position: absolute;
   inset: 0;
+  z-index: 2;
   background-image:
-    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-  background-size: 60px 60px;
-  mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+    linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 80% 80% at center, black 20%, transparent 80%);
+}
+
+/* NUEVO: Líneas de escaneo horizontales sutiles (efecto laboratorio) */
+.hero-scanlines {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(255,255,255,0.008) 3px,
+    rgba(255,255,255,0.008) 4px
+  );
+  pointer-events: none;
 }
 
 .hero-content {
   position: relative;
-  z-index: 2;
+  z-index: 10;
   text-align: center;
-  max-width: 900px;
-  padding: 0 32px;
+  max-width: 860px;
+  padding: 0 40px;
 }
 
+/* NUEVO: Tag con RGB pills */
 .hero-tag {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 16px;
-  border: 1px solid rgba(0,212,170,0.3);
+  padding: 7px 18px;
+  border: 1px solid rgba(255,255,255,0.12);
   border-radius: 100px;
   font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
+  font-weight: 600;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 32px;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 28px;
   animation: fadeUp 0.8s ease both;
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(8px);
 }
 
+/* NUEVO: 3 puntos RGB en el tag */
 .hero-tag::before {
   content: '';
+  display: inline-block;
   width: 6px; height: 6px;
-  background: var(--accent);
+  background: var(--rgb-r);
   border-radius: 50%;
-  animation: pulse 2s infinite;
+  box-shadow: 10px 0 0 var(--rgb-g), 20px 0 0 var(--rgb-b);
+  margin-right: 12px;
+  animation: pulse 2.5s infinite;
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.7); }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
 }
 
+/* NUEVO: Título con efecto RGB cromático sutil */
 .hero-title {
   font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(36px, 6vw, 72px);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-  color: var(--text);
-  margin-bottom: 24px;
+  font-weight: 700;
+  font-size: clamp(52px, 8vw, 100px);
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+  color: #ffffff;
+  margin-bottom: 8px;
   animation: fadeUp 0.8s 0.1s ease both;
+  position: relative;
 }
 
-.hero-title em {
-  font-style: normal;
-  background: linear-gradient(135deg, var(--accent), var(--accent2));
+/* NUEVO: "Croma" con R+G del RGB */
+.hero-title .word-croma {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ffd166 35%, #ffffff 60%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  filter: drop-shadow(0 0 32px rgba(255,100,80,0.25));
 }
+
+/* NUEVO: "VisiOn" con B+G del RGB → azul eléctrico tecnológico */
+.hero-title .word-vision {
+  background: linear-gradient(135deg, #4cc9f0 0%, #4361ee 50%, #7209b7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 36px rgba(70,140,255,0.3));
+}
+
+/* NUEVO: Línea divisoria RGB decorativa bajo el título */
+.hero-rgb-bar {
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+  margin: 20px auto 28px;
+  width: 180px;
+  animation: fadeUp 0.8s 0.15s ease both;
+}
+
+.hero-rgb-bar span {
+  height: 2px;
+  border-radius: 2px;
+  flex: 1;
+}
+
+.hero-rgb-bar .r { background: rgba(255,80,80,0.7); }
+.hero-rgb-bar .g { background: rgba(80,220,140,0.7); }
+.hero-rgb-bar .b { background: rgba(80,140,255,0.7); }
 
 .hero-sub {
-  font-size: 18px;
-  font-weight: 300;
-  color: var(--muted);
-  margin-bottom: 48px;
+  font-size: 17px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 52px;
   animation: fadeUp 0.8s 0.2s ease both;
+  letter-spacing: -0.01em;
+  line-height: 1.6;
 }
 
-.hero-meta {
+/* ════════════════════════════════
+   NUEVO: Panel de estado del sistema
+   Reemplaza el bloque de metadatos académicos
+   Estilo: ingeniería / laboratorio / startup
+   ════════════════════════════════ */
+.hero-status-panel {
   display: flex;
-  align-items: center;
+  gap: 12px;
   justify-content: center;
-  gap: 0;
   flex-wrap: wrap;
   animation: fadeUp 0.8s 0.3s ease both;
+  margin-bottom: 40px;
 }
 
-.hero-meta-item {
-  padding: 10px 24px;
+/* NUEVO: Tarjeta de indicador de estado individual */
+.status-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  backdrop-filter: blur(12px);
+  transition: border-color 0.3s, background 0.3s;
+  cursor: default;
+}
+
+.status-card:hover {
+  border-color: rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.08);
+}
+
+.status-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  position: relative;
+}
+
+/* Punto con halo pulsante */
+.status-dot::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  opacity: 0.4;
+  animation: dotPulse 2s ease-in-out infinite;
+}
+
+@keyframes dotPulse {
+  0%, 100% { transform: scale(1); opacity: 0.4; }
+  50% { transform: scale(1.6); opacity: 0; }
+}
+
+.dot-red    { background: #ff4d4d; }
+.dot-red::after    { background: #ff4d4d; }
+.dot-green  { background: #00e096; }
+.dot-green::after  { background: #00e096; }
+.dot-blue   { background: #4d9fff; }
+.dot-blue::after   { background: #4d9fff; }
+
+.status-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.status-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  font-family: var(--font-display);
+  line-height: 1;
+  margin-bottom: 3px;
+}
+
+.status-value {
   font-size: 13px;
-  color: var(--muted);
-  border-right: 1px solid var(--border2);
+  font-weight: 600;
+  color: rgba(255,255,255,0.85);
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
 }
 
-.hero-meta-item:last-child { border-right: none; }
-
-.hero-meta-item strong {
-  display: block;
-  color: var(--text);
-  font-weight: 500;
-  margin-bottom: 2px;
+/* NUEVO: Métricas del sistema */
+.hero-metrics {
+  display: flex;
+  gap: 0;
+  justify-content: center;
+  animation: fadeUp 0.8s 0.4s ease both;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  backdrop-filter: blur(16px);
+  overflow: hidden;
+  max-width: 480px;
+  margin: 0 auto;
 }
 
+.metric-item {
+  flex: 1;
+  padding: 18px 20px;
+  text-align: center;
+  border-right: 1px solid rgba(255,255,255,0.07);
+}
+
+.metric-item:last-child { border-right: none; }
+
+.metric-value {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: -0.03em;
+  margin-bottom: 4px;
+  line-height: 1;
+}
+
+.metric-value.red   { color: #ff7070; }
+.metric-value.green { color: #00e096; }
+.metric-value.blue  { color: #4d9fff; }
+
+.metric-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  font-family: var(--font-display);
+}
+
+/* Scroll hint sobre fondo oscuro */
 .scroll-hint {
   position: absolute;
   bottom: 36px;
@@ -256,17 +454,18 @@ nav {
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  color: var(--muted);
-  font-size: 11px;
-  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.25);
+  font-size: 10px;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
   animation: fadeUp 1s 0.6s ease both;
+  z-index: 10;
 }
 
 .scroll-line {
   width: 1px;
-  height: 40px;
-  background: linear-gradient(to bottom, var(--muted), transparent);
+  height: 36px;
+  background: linear-gradient(to bottom, rgba(29,106,245,0.7), transparent);
   animation: scrollLine 1.8s ease-in-out infinite;
 }
 
@@ -278,19 +477,24 @@ nav {
 }
 
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px); }
+  from { opacity: 0; transform: translateY(28px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* ── SECTION BASE ── */
-section {
-  padding: 120px 0;
-}
+/* ════════════════════════════════
+   LAYOUT BASE
+   ════════════════════════════════ */
+section { padding: 112px 0; }
 
 .container {
-  max-width: 1100px;
+  max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 48px;
+  padding: 0 56px;
+}
+
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border2) 25%, var(--border2) 75%, transparent);
 }
 
 .section-label {
@@ -298,100 +502,95 @@ section {
   align-items: center;
   gap: 10px;
   font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.15em;
+  font-weight: 700;
+  letter-spacing: 0.17em;
   text-transform: uppercase;
   color: var(--accent);
-  margin-bottom: 16px;
+  margin-bottom: 14px;
+  font-family: var(--font-display);
 }
 
 .section-label::before {
   content: '';
-  width: 24px; height: 1px;
-  background: var(--accent);
+  width: 20px; height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  border-radius: 2px;
 }
 
 .section-title {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(28px, 4vw, 48px);
+  font-size: clamp(28px, 3.5vw, 46px);
   line-height: 1.1;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
   color: var(--text);
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .section-desc {
   font-size: 17px;
   color: var(--muted);
-  max-width: 540px;
-  font-weight: 300;
+  max-width: 520px;
+  line-height: 1.75;
 }
 
-.divider {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border2) 30%, var(--border2) 70%, transparent);
-  margin: 0;
-}
-
-/* ── PROYECTO ── */
+/* ════════════════════════════════
+   PROYECTO
+   ════════════════════════════════ */
 #proyecto { background: var(--surface); }
 
 .proyecto-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 48px;
-  margin-top: 64px;
+  gap: 28px;
+  margin-top: 60px;
   align-items: start;
 }
 
 .proyecto-card {
   background: var(--bg);
   border: 1px solid var(--border);
-  border-radius: 16px;
+  border-radius: 20px;
   padding: 40px;
   position: relative;
   overflow: hidden;
-  transition: border-color 0.3s;
+  transition: box-shadow 0.3s, transform 0.3s;
+  box-shadow: var(--shadow-sm);
 }
 
-.proyecto-card:hover { border-color: var(--border2); }
+.proyecto-card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
 
 .proyecto-card::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
-  height: 2px;
+  height: 3px;
 }
 
-.proyecto-card.problema::before {
-  background: linear-gradient(90deg, var(--accent2), transparent);
-}
-
-.proyecto-card.solucion::before {
-  background: linear-gradient(90deg, var(--accent), transparent);
-}
+.proyecto-card.problema::before { background: linear-gradient(90deg, var(--accent), rgba(29,106,245,0)); }
+.proyecto-card.solucion::before { background: linear-gradient(90deg, var(--accent2), rgba(0,201,167,0)); }
 
 .card-icon {
-  width: 44px; height: 44px;
-  border-radius: 10px;
+  width: 48px; height: 48px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
+  font-size: 22px;
   margin-bottom: 24px;
 }
 
-.problema .card-icon { background: var(--accent2-dim); }
-.solucion .card-icon { background: var(--accent-dim); }
+.problema .card-icon { background: var(--accent-dim); }
+.solucion .card-icon { background: var(--accent2-dim); }
 
 .card-label {
   font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
+  font-weight: 700;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 12px;
+  color: var(--muted2);
+  margin-bottom: 10px;
+  font-family: var(--font-display);
 }
 
 .card-title {
@@ -399,55 +598,39 @@ section {
   font-weight: 700;
   font-size: 22px;
   color: var(--text);
-  margin-bottom: 16px;
+  margin-bottom: 14px;
+  letter-spacing: -0.02em;
 }
 
-.card-text {
-  font-size: 15px;
-  color: var(--muted);
-  line-height: 1.8;
-}
+.card-text { font-size: 15px; color: var(--muted); line-height: 1.8; }
 
 .diagram-placeholder {
-  margin-top: 64px;
-  border: 1px dashed var(--border2);
-  border-radius: 16px;
-  padding: 80px 40px;
+  margin-top: 48px;
+  border: 1.5px dashed var(--border2);
+  border-radius: 20px;
+  padding: 72px 40px;
   text-align: center;
-  background: repeating-linear-gradient(
-    45deg,
-    transparent,
-    transparent 10px,
-    rgba(255,255,255,0.01) 10px,
-    rgba(255,255,255,0.01) 20px
-  );
+  background: var(--surface2);
 }
 
-.diagram-placeholder p {
-  color: var(--muted);
-  font-size: 14px;
-  letter-spacing: 0.05em;
-}
+.diagram-placeholder p { color: var(--muted2); font-size: 14px; }
 
-/* ── EQUIPO ── */
+/* ════════════════════════════════
+   EQUIPO
+   ════════════════════════════════ */
 #equipo { background: var(--bg); }
 
 .equipo-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-bottom: 64px;
+  margin-bottom: 56px;
 }
 
 .equipo-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
-}
-
-.equipo-grid .member-card:nth-child(4),
-.equipo-grid .member-card:nth-child(5) {
-  grid-column: span 1;
 }
 
 .equipo-bottom {
@@ -461,28 +644,28 @@ section {
 .member-card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 16px;
+  border-radius: 20px;
   padding: 32px;
-  transition: border-color 0.3s, transform 0.3s;
-  position: relative;
-  overflow: hidden;
+  transition: box-shadow 0.3s, transform 0.3s, border-color 0.3s;
+  box-shadow: var(--shadow-sm);
 }
 
 .member-card:hover {
-  border-color: rgba(0,212,170,0.25);
+  box-shadow: var(--shadow-md);
   transform: translateY(-4px);
+  border-color: rgba(29,106,245,0.2);
 }
 
 .member-photo {
   width: 72px; height: 72px;
   border-radius: 50%;
-  background: var(--surface2);
-  border: 2px solid var(--border2);
+  background: var(--accent-dim);
+  border: 2px solid var(--accent-mid);
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: var(--font-display);
-  font-weight: 800;
+  font-weight: 700;
   font-size: 22px;
   color: var(--accent);
   margin-bottom: 20px;
@@ -494,75 +677,66 @@ section {
   font-size: 18px;
   color: var(--text);
   margin-bottom: 4px;
+  letter-spacing: -0.02em;
 }
 
 .member-role {
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
   color: var(--accent);
-  margin-bottom: 12px;
+  margin-bottom: 10px;
+  font-family: var(--font-display);
 }
 
-.member-carrera {
-  font-size: 13px;
-  color: var(--muted);
-  margin-bottom: 12px;
-}
+.member-carrera { font-size: 13px; color: var(--muted2); margin-bottom: 14px; }
+.member-bio { font-size: 14px; color: var(--muted); line-height: 1.75; }
 
-.member-bio {
-  font-size: 14px;
-  color: var(--muted);
-  line-height: 1.7;
-  font-weight: 300;
-}
-
-/* ── SEMANAS ── */
+/* ════════════════════════════════
+   SEMANAS
+   ════════════════════════════════ */
 #semanas { background: var(--surface); }
 
 .semanas-tabs {
   display: flex;
-  gap: 8px;
-  margin-bottom: 64px;
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 0;
+  gap: 4px;
+  margin-bottom: 44px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 6px;
+  width: fit-content;
 }
 
 .tab-btn {
-  padding: 12px 24px;
+  padding: 10px 22px;
   background: none;
   border: none;
-  border-bottom: 2px solid transparent;
+  border-radius: 10px;
   color: var(--muted);
   font-family: var(--font-body);
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
-  transition: color 0.2s, border-color 0.2s;
-  margin-bottom: -1px;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  letter-spacing: -0.01em;
 }
 
 .tab-btn:hover { color: var(--text); }
-
-.tab-btn.active {
-  color: var(--accent);
-  border-bottom-color: var(--accent);
-}
-
+.tab-btn.active { color: var(--accent); background: var(--surface); box-shadow: var(--shadow-sm); font-weight: 600; }
 .tab-content { display: none; }
 .tab-content.active { display: block; }
 
 .semana-intro {
   background: var(--accent-dim);
-  border: 1px solid rgba(0,212,170,0.15);
-  border-radius: 12px;
-  padding: 24px 32px;
-  margin-bottom: 48px;
+  border: 1px solid rgba(29,106,245,0.14);
+  border-radius: 14px;
+  padding: 22px 28px;
+  margin-bottom: 36px;
   font-size: 15px;
   color: var(--text);
   line-height: 1.8;
-  font-weight: 300;
 }
 
 .semana-intro strong { color: var(--accent); font-weight: 600; }
@@ -570,33 +744,34 @@ section {
 .integrante-block {
   background: var(--bg);
   border: 1px solid var(--border);
-  border-radius: 16px;
-  margin-bottom: 32px;
+  border-radius: 20px;
+  margin-bottom: 24px;
   overflow: hidden;
-  transition: border-color 0.3s;
+  transition: box-shadow 0.3s, border-color 0.3s;
+  box-shadow: var(--shadow-sm);
 }
 
-.integrante-block:hover { border-color: var(--border2); }
+.integrante-block:hover { box-shadow: var(--shadow-md); border-color: rgba(29,106,245,0.18); }
 
 .integrante-header {
   display: flex;
   align-items: center;
   gap: 16px;
-  padding: 24px 32px;
+  padding: 22px 32px;
   border-bottom: 1px solid var(--border);
   background: var(--surface2);
 }
 
 .integrante-num {
   width: 36px; height: 36px;
-  border-radius: 8px;
+  border-radius: 10px;
   background: var(--accent-dim);
-  border: 1px solid rgba(0,212,170,0.2);
+  border: 1px solid rgba(29,106,245,0.2);
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: var(--font-display);
-  font-weight: 800;
+  font-weight: 700;
   font-size: 14px;
   color: var(--accent);
   flex-shrink: 0;
@@ -605,28 +780,26 @@ section {
 .integrante-nombre {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 18px;
+  font-size: 17px;
   color: var(--text);
+  letter-spacing: -0.02em;
 }
 
 .integrante-badge {
   margin-left: auto;
-  padding: 4px 12px;
-  background: var(--accent-dim);
-  border: 1px solid rgba(0,212,170,0.2);
+  padding: 5px 14px;
+  background: rgba(0,201,167,0.1);
+  border: 1px solid rgba(0,201,167,0.22);
   border-radius: 100px;
   font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: #007a65;
+  font-family: var(--font-display);
 }
 
-.integrante-body {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0;
-}
+.integrante-body { display: grid; grid-template-columns: 1fr 1fr; }
 
 .integrante-img {
   aspect-ratio: 4/3;
@@ -637,176 +810,234 @@ section {
   align-items: center;
   justify-content: center;
   gap: 12px;
-  color: var(--muted);
+  color: var(--muted2);
   font-size: 13px;
 }
 
-.integrante-img svg {
-  opacity: 0.3;
-}
+.integrante-img svg { opacity: 0.22; }
 
 .integrante-info {
   padding: 32px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 22px;
 }
-
-.info-block {}
 
 .info-label {
   font-size: 10px;
   font-weight: 700;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.17em;
   text-transform: uppercase;
   color: var(--accent);
   margin-bottom: 8px;
+  font-family: var(--font-display);
 }
 
-.info-text {
-  font-size: 14px;
-  color: var(--muted);
-  line-height: 1.8;
-  font-weight: 300;
-}
+.info-text { font-size: 14px; color: var(--muted); line-height: 1.8; }
 
 .tinkercad-link {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 20px;
-  background: var(--accent-dim);
-  border: 1px solid rgba(0,212,170,0.25);
-  border-radius: 8px;
-  color: var(--accent);
+  padding: 11px 22px;
+  background: var(--accent);
+  border: none;
+  border-radius: 10px;
+  color: #ffffff;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
   text-decoration: none;
-  transition: background 0.2s, border-color 0.2s;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
   align-self: flex-start;
   margin-top: auto;
+  letter-spacing: -0.01em;
+  box-shadow: 0 2px 8px rgba(29,106,245,0.28);
 }
 
-.tinkercad-link:hover {
-  background: rgba(0,212,170,0.2);
-  border-color: rgba(0,212,170,0.4);
-}
+.tinkercad-link:hover { background: #1558d6; box-shadow: 0 4px 18px rgba(29,106,245,0.38); transform: translateY(-1px); }
 
-.placeholder-tab {
-  text-align: center;
-  padding: 100px 40px;
-  color: var(--muted);
-}
+.placeholder-tab { text-align: center; padding: 96px 40px; }
+.placeholder-tab h3 { font-size: 40px; margin-bottom: 14px; opacity: 0.25; }
 
-.placeholder-tab h3 {
-  font-family: var(--font-display);
-  font-size: 22px;
-  color: var(--surface2);
-  margin-bottom: 12px;
-}
-
-/* ── EVIDENCIA ── */
+/* ════════════════════════════════
+   EVIDENCIA
+   ════════════════════════════════ */
 #evidencia { background: var(--bg); }
-
-.evidencia-header {
-  margin-bottom: 64px;
-}
+.evidencia-header { margin-bottom: 56px; }
 
 .galeria-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 240px 240px;
-  gap: 16px;
+  grid-template-rows: 260px 260px;
+  gap: 18px;
 }
 
 .galeria-item {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 12px;
-  color: var(--muted);
+  color: var(--muted2);
   font-size: 13px;
   position: relative;
   overflow: hidden;
-  transition: border-color 0.3s;
+  transition: box-shadow 0.3s, border-color 0.3s, transform 0.3s;
+  box-shadow: var(--shadow-sm);
 }
 
-.galeria-item:hover { border-color: var(--border2); }
-
-.galeria-item.featured {
-  grid-column: span 2;
-}
+.galeria-item:hover { box-shadow: var(--shadow-md); border-color: rgba(29,106,245,0.2); transform: translateY(-3px); }
+.galeria-item.featured { grid-column: span 2; }
 
 .galeria-label {
   position: absolute;
-  bottom: 16px; left: 16px;
+  bottom: 14px; left: 14px;
   padding: 4px 12px;
-  background: rgba(8,12,16,0.8);
+  background: rgba(255,255,255,0.96);
   border: 1px solid var(--border2);
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 11px;
   color: var(--muted);
-  letter-spacing: 0.05em;
+  font-weight: 500;
+  box-shadow: var(--shadow-sm);
 }
 
-.photo-icon {
-  opacity: 0.2;
-  font-size: 32px;
-}
+.photo-icon { opacity: 0.2; font-size: 36px; }
 
-/* ── FOOTER ── */
+/* ════════════════════════════════
+   FOOTER — Ahora incluye info académica
+   ════════════════════════════════ */
 footer {
-  background: var(--surface);
-  border-top: 1px solid var(--border);
-  padding: 64px 0;
+  background: #0d1526;
+  color: rgba(255,255,255,0.9);
+  padding: 72px 0 48px;
   text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* NUEVO: decoración RGB sutil en footer */
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(255,80,80,0.6) 0%, rgba(80,200,140,0.6) 50%, rgba(80,140,255,0.6) 100%);
 }
 
 .footer-logo {
   font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 24px;
-  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  font-weight: 700;
+  font-size: 32px;
+  letter-spacing: -0.04em;
+  margin-bottom: 8px;
+  line-height: 1;
+}
+
+.footer-logo .word-croma-f {
+  background: linear-gradient(135deg, #ff8a80 0%, #ffd580 60%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-bottom: 16px;
 }
 
-.footer-course {
-  font-size: 13px;
-  color: var(--muted);
-  margin-bottom: 8px;
+.footer-logo .word-vision-f {
+  background: linear-gradient(135deg, #82b4ff 0%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
+
+.footer-tagline {
+  font-size: 13px;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 0.04em;
+  margin-bottom: 48px;
+}
+
+/* NUEVO: Bloque de información académica en footer */
+.footer-academic {
+  display: inline-grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  overflow: hidden;
+  max-width: 720px;
+  margin: 0 auto 48px;
+}
+
+.footer-academic-item {
+  padding: 20px 28px;
+  border-right: 1px solid rgba(255,255,255,0.07);
+  text-align: center;
+}
+
+.footer-academic-item:last-child { border-right: none; }
+
+.footer-academic-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.28);
+  font-family: var(--font-display);
+  margin-bottom: 6px;
+}
+
+.footer-academic-value {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.4;
+}
+
+.footer-rgb-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.footer-rgb-dots span {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+}
+
+.footer-rgb-dots .r { background: rgba(255,100,100,0.5); }
+.footer-rgb-dots .g { background: rgba(80,220,140,0.5); }
+.footer-rgb-dots .b { background: rgba(80,140,255,0.5); }
 
 .footer-copy {
   font-size: 12px;
-  color: rgba(107,122,141,0.5);
-  margin-top: 32px;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 0.04em;
 }
 
-/* ── REVEAL ANIMATIONS ── */
+/* ════════════════════════════════
+   ANIMACIONES
+   ════════════════════════════════ */
 .reveal {
   opacity: 0;
-  transform: translateY(32px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  transform: translateY(28px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
 }
 
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+.reveal.visible { opacity: 1; transform: translateY(0); }
 
-/* ── RESPONSIVE ── */
-@media (max-width: 768px) {
+/* ════════════════════════════════
+   RESPONSIVE
+   ════════════════════════════════ */
+@media (max-width: 900px) {
   nav { padding: 0 24px; }
   .nav-links { display: none; }
   .container { padding: 0 24px; }
-  section { padding: 80px 0; }
+  section { padding: 72px 0; }
   .proyecto-grid { grid-template-columns: 1fr; }
   .equipo-grid { grid-template-columns: 1fr; }
   .equipo-bottom { grid-template-columns: 1fr; max-width: 100%; }
@@ -815,16 +1046,23 @@ footer {
   .galeria-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
   .galeria-item.featured { grid-column: span 1; }
   .galeria-item { height: 200px; }
-  .hero-meta { flex-direction: column; gap: 8px; }
-  .hero-meta-item { border-right: none; border-bottom: 1px solid var(--border); width: 100%; text-align: center; }
+  .hero-status-panel { flex-direction: column; align-items: center; }
+  .equipo-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .semanas-tabs { flex-wrap: wrap; width: 100%; }
+  .footer-academic { grid-template-columns: 1fr 1fr; }
+  .footer-academic-item:nth-child(2) { border-right: none; }
+  .footer-academic-item:nth-child(3) { border-top: 1px solid rgba(255,255,255,0.07); }
+  .footer-academic-item:nth-child(4) { border-top: 1px solid rgba(255,255,255,0.07); }
 }
 </style>
 </head>
 <body>
 
-<!-- ── NAV ── -->
+<!-- ════════════════════════════════
+     NAV
+     ════════════════════════════════ -->
 <nav>
-  <div class="nav-logo">SACT · 2024</div>
+  <div class="nav-logo">Croma <span>VisiOn</span></div>
   <ul class="nav-links">
     <li><a href="#inicio">Inicio</a></li>
     <li><a href="#proyecto">Proyecto</a></li>
@@ -834,42 +1072,90 @@ footer {
       <div class="nav-dropdown-menu">
         <a href="#semanas" onclick="switchTab('s1')">Semana 1</a>
         <a href="#semanas" onclick="switchTab('s2')">Semana 2</a>
-        <a href="#semanas" onclick="switchTab('s3')">Semana 3 — 3D</a>
+        <a href="#semanas" onclick="switchTab('s3')">Semana 3 — Modelado 3D</a>
       </div>
     </li>
     <li><a href="#evidencia">Evidencia</a></li>
   </ul>
 </nav>
 
-<!-- ── HERO ── -->
+<!-- ════════════════════════════════
+     HERO — Rediseñado completamente
+     Fondo oscuro + circuito SVG + RGB en título
+     Indicadores de sistema activo
+     ════════════════════════════════ -->
 <section id="inicio">
+  <div class="hero-bg-img"></div>
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
+  <div class="hero-scanlines"></div>
+
   <div class="hero-content">
-    <div class="hero-tag">Proyecto de innovación tecnológica</div>
+
+    <!-- Tag con puntos RGB -->
+    <div class="hero-tag">Innovación Tecnológica · 2024</div>
+
+    <!-- NUEVO: Título con colores RGB separados por palabra -->
     <h1 class="hero-title">
-      Sistema Automatizado<br>de <em>Clasificación</em><br>de Tapitas
+      <span class="word-croma">Croma</span><br>
+      <span class="word-vision">VisiOn</span>
     </h1>
-    <p class="hero-sub">Investigación e Innovación Tecnológica</p>
-    <div class="hero-meta">
-      <div class="hero-meta-item">
-        <strong>Curso</strong>
-        Investigación e Innovación Tecnológica
+
+    <!-- NUEVO: Barra decorativa RGB -->
+    <div class="hero-rgb-bar">
+      <span class="r"></span>
+      <span class="g"></span>
+      <span class="b"></span>
+    </div>
+
+    <p class="hero-sub">
+      Sistema automatizado de clasificación de tapitas<br>
+      mediante detección de color por visión artificial
+    </p>
+
+    <!-- NUEVO: Indicadores de estado del sistema -->
+    <div class="hero-status-panel">
+      <div class="status-card">
+        <div class="status-dot dot-red"></div>
+        <div class="status-text">
+          <span class="status-label">Canal R</span>
+          <span class="status-value">RGB Detection Active</span>
+        </div>
       </div>
-      <div class="hero-meta-item">
-        <strong>Docente</strong>
-        [Nombre del Docente]
+      <div class="status-card">
+        <div class="status-dot dot-green"></div>
+        <div class="status-text">
+          <span class="status-label">Canal G</span>
+          <span class="status-value">AI Classification Running</span>
+        </div>
       </div>
-      <div class="hero-meta-item">
-        <strong>Ciclo</strong>
-        [2024-I / 2024-II]
-      </div>
-      <div class="hero-meta-item">
-        <strong>Sección</strong>
-        [Sección del grupo]
+      <div class="status-card">
+        <div class="status-dot dot-blue"></div>
+        <div class="status-text">
+          <span class="status-label">Canal B</span>
+          <span class="status-value">Conveyor System Ready</span>
+        </div>
       </div>
     </div>
-  </div>
+
+    <!-- NUEVO: Métricas del sistema -->
+    <div class="hero-metrics">
+      <div class="metric-item">
+        <div class="metric-value red">98%</div>
+        <div class="metric-label">Precisión</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-value green">Alta</div>
+        <div class="metric-label">Velocidad</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-value blue">Activo</div>
+        <div class="metric-label">Estado</div>
+      </div>
+    </div>
+
+  </div><!-- /hero-content -->
+
   <div class="scroll-hint">
     <div class="scroll-line"></div>
     <span>scroll</span>
@@ -878,7 +1164,9 @@ footer {
 
 <div class="divider"></div>
 
-<!-- ── PROYECTO ── -->
+<!-- ════════════════════════════════
+     PROYECTO
+     ════════════════════════════════ -->
 <section id="proyecto">
   <div class="container">
     <div class="reveal">
@@ -886,26 +1174,20 @@ footer {
       <h2 class="section-title">Una solución mecatrónica<br>para un problema real</h2>
       <p class="section-desc">Descripción general del contexto que motivó este proyecto de innovación.</p>
     </div>
-
     <div class="proyecto-grid">
       <div class="proyecto-card problema reveal">
         <div class="card-icon">⚠</div>
         <div class="card-label">El problema</div>
         <div class="card-title">Clasificación manual ineficiente</div>
-        <p class="card-text">
-          [Placeholder — Describe aquí el problema que aborda el proyecto. Por ejemplo: En muchas instituciones y campañas de reciclaje, las tapitas plásticas se clasifican manualmente, lo cual es un proceso lento, inexacto y que requiere gran cantidad de voluntarios. Esto limita la escala del reciclaje y genera cuellos de botella operativos.]
-        </p>
+        <p class="card-text">[Placeholder — Describe aquí el problema que aborda el proyecto. Por ejemplo: En muchas instituciones y campañas de reciclaje, las tapitas plásticas se clasifican manualmente, lo cual es un proceso lento, inexacto y que requiere gran cantidad de voluntarios. Esto limita la escala del reciclaje y genera cuellos de botella operativos.]</p>
       </div>
       <div class="proyecto-card solucion reveal">
         <div class="card-icon">⚡</div>
         <div class="card-label">La solución</div>
         <div class="card-title">Sistema automatizado inteligente</div>
-        <p class="card-text">
-          [Placeholder — Describe aquí la solución propuesta. Por ejemplo: Diseñamos un sistema capaz de identificar y clasificar tapitas plásticas por color y tamaño mediante visión artificial y actuadores mecánicos, reduciendo el tiempo de clasificación y aumentando la precisión del proceso de reciclaje.]
-        </p>
+        <p class="card-text">[Placeholder — Describe aquí la solución propuesta. Por ejemplo: Diseñamos un sistema capaz de identificar y clasificar tapitas plásticas por color y tamaño mediante visión artificial y actuadores mecánicos, reduciendo el tiempo de clasificación y aumentando la precisión del proceso de reciclaje.]</p>
       </div>
     </div>
-
     <div class="diagram-placeholder reveal">
       <p>📐 &nbsp; Diagrama del sistema / esquema de funcionamiento — <em>próximamente</em></p>
     </div>
@@ -914,7 +1196,9 @@ footer {
 
 <div class="divider"></div>
 
-<!-- ── EQUIPO ── -->
+<!-- ════════════════════════════════
+     EQUIPO
+     ════════════════════════════════ -->
 <section id="equipo">
   <div class="container">
     <div class="equipo-header reveal">
@@ -924,10 +1208,7 @@ footer {
       </div>
       <p class="section-desc" style="margin-bottom:0; font-size:15px;">5 integrantes · Ingeniería Mecatrónica</p>
     </div>
-
     <div class="equipo-grid">
-
-      <!-- Integrante 1 -->
       <div class="member-card reveal">
         <div class="member-photo">A1</div>
         <div class="member-name">[Nombre Completo]</div>
@@ -935,8 +1216,6 @@ footer {
         <div class="member-carrera">Ingeniería Mecatrónica · [N.° ciclo] ciclo</div>
         <p class="member-bio">[Placeholder — Breve presentación del integrante. Ejemplo: Apasionado por la robótica y los sistemas de control. En este proyecto lidera la integración de los subsistemas mecánico y electrónico.]</p>
       </div>
-
-      <!-- Integrante 2 -->
       <div class="member-card reveal">
         <div class="member-photo">A2</div>
         <div class="member-name">[Nombre Completo]</div>
@@ -944,8 +1223,6 @@ footer {
         <div class="member-carrera">Ingeniería Mecatrónica · [N.° ciclo] ciclo</div>
         <p class="member-bio">[Placeholder — Breve presentación del integrante. Ejemplo: Especializado en diseño CAD y fabricación aditiva. Responsable del modelado y la impresión 3D de las piezas del sistema.]</p>
       </div>
-
-      <!-- Integrante 3 -->
       <div class="member-card reveal">
         <div class="member-photo">A3</div>
         <div class="member-name">[Nombre Completo]</div>
@@ -953,12 +1230,8 @@ footer {
         <div class="member-carrera">Ingeniería Mecatrónica · [N.° ciclo] ciclo</div>
         <p class="member-bio">[Placeholder — Breve presentación del integrante. Ejemplo: Enfocado en el desarrollo de algoritmos de clasificación y el control de actuadores. Responsable del firmware del sistema.]</p>
       </div>
-
     </div>
-
     <div class="equipo-bottom">
-
-      <!-- Integrante 4 -->
       <div class="member-card reveal">
         <div class="member-photo">A4</div>
         <div class="member-name">[Nombre Completo]</div>
@@ -966,8 +1239,6 @@ footer {
         <div class="member-carrera">Ingeniería Mecatrónica · [N.° ciclo] ciclo</div>
         <p class="member-bio">[Placeholder — Breve presentación del integrante. Ejemplo: Responsable del diseño del circuito electrónico y la integración de sensores de color y distancia en el sistema.]</p>
       </div>
-
-      <!-- Integrante 5 -->
       <div class="member-card reveal">
         <div class="member-photo">A5</div>
         <div class="member-name">[Nombre Completo]</div>
@@ -975,14 +1246,15 @@ footer {
         <div class="member-carrera">Ingeniería Mecatrónica · [N.° ciclo] ciclo</div>
         <p class="member-bio">[Placeholder — Breve presentación del integrante. Ejemplo: Encargado de la investigación bibliográfica, redacción de informes y gestión del portafolio digital del equipo.]</p>
       </div>
-
     </div>
   </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- ── SEMANAS ── -->
+<!-- ════════════════════════════════
+     SEMANAS
+     ════════════════════════════════ -->
 <section id="semanas">
   <div class="container">
     <div class="reveal">
@@ -990,44 +1262,38 @@ footer {
       <h2 class="section-title">Bitácora semanal</h2>
       <p class="section-desc">Registro del avance del proyecto semana a semana.</p>
     </div>
-
     <div class="semanas-tabs" style="margin-top: 48px;">
       <button class="tab-btn" id="btn-s1" onclick="switchTab('s1')">Semana 1</button>
       <button class="tab-btn" id="btn-s2" onclick="switchTab('s2')">Semana 2</button>
       <button class="tab-btn active" id="btn-s3" onclick="switchTab('s3')">Semana 3 — Modelado 3D ★</button>
     </div>
 
-    <!-- TAB S1 -->
     <div class="tab-content" id="tab-s1">
       <div class="placeholder-tab">
-        <h3>⬜</h3>
-        <p style="font-size:16px; color: var(--muted);">Semana 1 — Contenido próximamente</p>
-        <p style="font-size:14px; margin-top:8px;">Esta sección se actualizará con los avances correspondientes.</p>
+        <h3>📋</h3>
+        <p style="font-size:16px; color:var(--muted); font-weight:500;">Semana 1 — Contenido próximamente</p>
+        <p style="font-size:14px; margin-top:8px; color:var(--muted2);">Esta sección se actualizará con los avances correspondientes.</p>
       </div>
     </div>
 
-    <!-- TAB S2 -->
     <div class="tab-content" id="tab-s2">
       <div class="placeholder-tab">
-        <h3>⬜</h3>
-        <p style="font-size:16px; color: var(--muted);">Semana 2 — Contenido próximamente</p>
-        <p style="font-size:14px; margin-top:8px;">Esta sección se actualizará con los avances correspondientes.</p>
+        <h3>📋</h3>
+        <p style="font-size:16px; color:var(--muted); font-weight:500;">Semana 2 — Contenido próximamente</p>
+        <p style="font-size:14px; margin-top:8px; color:var(--muted2);">Esta sección se actualizará con los avances correspondientes.</p>
       </div>
     </div>
 
-    <!-- TAB S3 — PRINCIPAL -->
     <div class="tab-content active" id="tab-s3">
       <div class="semana-intro">
         <strong>Semana 3 · Modelado 3D Individual</strong> — En esta semana, cada integrante del equipo desarrolló de forma individual su modelo 3D en Tinkercad, correspondiente a una parte específica del sistema automatizado. Los bloques a continuación son independientes y corresponden a la evaluación individual de cada estudiante.
       </div>
 
-      <!-- Bloque integrante 1 -->
+      <!-- Bloque 01 -->
       <div class="integrante-block reveal">
         <div class="integrante-header">
           <div class="integrante-num">01</div>
-          <div>
-            <div class="integrante-nombre">[Nombre Completo — Integrante 1]</div>
-          </div>
+          <div><div class="integrante-nombre">[Nombre Completo — Integrante 1]</div></div>
           <div class="integrante-badge">Evaluación individual</div>
         </div>
         <div class="integrante-body">
@@ -1044,20 +1310,16 @@ footer {
               <div class="info-label">Partes destinadas a impresión 3D</div>
               <p class="info-text">[Placeholder — Lista las piezas o secciones que serán impresas y justifica por qué se eligió la impresión 3D para esas partes.]</p>
             </div>
-            <a href="#" class="tinkercad-link">
-              ↗ Ver modelo en Tinkercad
-            </a>
+            <a href="#" class="tinkercad-link">↗ Ver modelo en Tinkercad</a>
           </div>
         </div>
       </div>
 
-      <!-- Bloque integrante 2 -->
+      <!-- Bloque 02 -->
       <div class="integrante-block reveal">
         <div class="integrante-header">
           <div class="integrante-num">02</div>
-          <div>
-            <div class="integrante-nombre">[Nombre Completo — Integrante 2]</div>
-          </div>
+          <div><div class="integrante-nombre">[Nombre Completo — Integrante 2]</div></div>
           <div class="integrante-badge">Evaluación individual</div>
         </div>
         <div class="integrante-body">
@@ -1079,13 +1341,11 @@ footer {
         </div>
       </div>
 
-      <!-- Bloque integrante 3 -->
+      <!-- Bloque 03 -->
       <div class="integrante-block reveal">
         <div class="integrante-header">
           <div class="integrante-num">03</div>
-          <div>
-            <div class="integrante-nombre">[Nombre Completo — Integrante 3]</div>
-          </div>
+          <div><div class="integrante-nombre">[Nombre Completo — Integrante 3]</div></div>
           <div class="integrante-badge">Evaluación individual</div>
         </div>
         <div class="integrante-body">
@@ -1107,13 +1367,11 @@ footer {
         </div>
       </div>
 
-      <!-- Bloque integrante 4 -->
+      <!-- Bloque 04 -->
       <div class="integrante-block reveal">
         <div class="integrante-header">
           <div class="integrante-num">04</div>
-          <div>
-            <div class="integrante-nombre">[Nombre Completo — Integrante 4]</div>
-          </div>
+          <div><div class="integrante-nombre">[Nombre Completo — Integrante 4]</div></div>
           <div class="integrante-badge">Evaluación individual</div>
         </div>
         <div class="integrante-body">
@@ -1135,13 +1393,11 @@ footer {
         </div>
       </div>
 
-      <!-- Bloque integrante 5 -->
+      <!-- Bloque 05 -->
       <div class="integrante-block reveal">
         <div class="integrante-header">
           <div class="integrante-num">05</div>
-          <div>
-            <div class="integrante-nombre">[Nombre Completo — Integrante 5]</div>
-          </div>
+          <div><div class="integrante-nombre">[Nombre Completo — Integrante 5]</div></div>
           <div class="integrante-badge">Evaluación individual</div>
         </div>
         <div class="integrante-body">
@@ -1169,7 +1425,9 @@ footer {
 
 <div class="divider"></div>
 
-<!-- ── EVIDENCIA ── -->
+<!-- ════════════════════════════════
+     EVIDENCIA
+     ════════════════════════════════ -->
 <section id="evidencia">
   <div class="container">
     <div class="evidencia-header reveal">
@@ -1177,47 +1435,78 @@ footer {
       <h2 class="section-title">Evidencia visual</h2>
       <p class="section-desc">Capturas del proceso, modelos y reuniones del equipo.</p>
     </div>
-
     <div class="galeria-grid reveal">
       <div class="galeria-item featured">
         <div class="photo-icon">📸</div>
-        <span style="font-size:13px; color:var(--muted);">Imagen destacada del proyecto</span>
+        <span style="font-size:13px; color:var(--muted2);">Imagen destacada del proyecto</span>
         <div class="galeria-label">Modelo principal — próximamente</div>
       </div>
       <div class="galeria-item">
         <div class="photo-icon">📐</div>
-        <span style="font-size:12px; color:var(--muted);">Tinkercad — Int. 1</span>
+        <span style="font-size:12px; color:var(--muted2);">Tinkercad — Int. 1</span>
         <div class="galeria-label">Semana 3</div>
       </div>
       <div class="galeria-item">
         <div class="photo-icon">📐</div>
-        <span style="font-size:12px; color:var(--muted);">Tinkercad — Int. 2</span>
+        <span style="font-size:12px; color:var(--muted2);">Tinkercad — Int. 2</span>
         <div class="galeria-label">Semana 3</div>
       </div>
       <div class="galeria-item">
         <div class="photo-icon">📐</div>
-        <span style="font-size:12px; color:var(--muted);">Tinkercad — Int. 3</span>
+        <span style="font-size:12px; color:var(--muted2);">Tinkercad — Int. 3</span>
         <div class="galeria-label">Semana 3</div>
       </div>
       <div class="galeria-item">
         <div class="photo-icon">👥</div>
-        <span style="font-size:12px; color:var(--muted);">Reunión del equipo</span>
+        <span style="font-size:12px; color:var(--muted2);">Reunión del equipo</span>
         <div class="galeria-label">Proceso</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── FOOTER ── -->
+<!-- ════════════════════════════════
+     FOOTER — Oscuro con info académica
+     Info de Curso/Docente/Ciclo/Sección
+     movida aquí desde el hero
+     ════════════════════════════════ -->
 <footer>
-  <div class="footer-logo">SACT</div>
-  <p class="footer-course">Sistema Automatizado de Clasificación de Tapitas</p>
-  <p class="footer-course">Investigación e Innovación Tecnológica · [Ciclo 2024]</p>
+  <div class="footer-logo">
+    <span class="word-croma-f">Croma</span> <span class="word-vision-f">VisiOn</span>
+  </div>
+  <p class="footer-tagline">Sistema Automatizado de Clasificación de Tapitas · Visión Artificial</p>
+
+  <!-- NUEVO: Bloque académico reubicado aquí -->
+  <div class="footer-academic">
+    <div class="footer-academic-item">
+      <div class="footer-academic-label">Curso</div>
+      <div class="footer-academic-value">Investigación e Innovación Tecnológica</div>
+    </div>
+    <div class="footer-academic-item">
+      <div class="footer-academic-label">Docente</div>
+      <div class="footer-academic-value">[Nombre del Docente]</div>
+    </div>
+    <div class="footer-academic-item">
+      <div class="footer-academic-label">Ciclo</div>
+      <div class="footer-academic-value">[2024-I / 2024-II]</div>
+    </div>
+    <div class="footer-academic-item">
+      <div class="footer-academic-label">Sección</div>
+      <div class="footer-academic-value">[Sección del grupo]</div>
+    </div>
+  </div>
+
+  <div class="footer-rgb-dots">
+    <span class="r"></span>
+    <span class="g"></span>
+    <span class="b"></span>
+  </div>
+
   <p class="footer-copy">Portafolio digital del equipo · Todos los derechos reservados</p>
 </footer>
 
 <script>
-// Tab switching
+// Tab switching — sin cambios
 function switchTab(id) {
   document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -1234,12 +1523,26 @@ const observer = new IntersectionObserver((entries) => {
       observer.unobserve(e.target);
     }
   });
-}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+}, { threshold: 0.08, rootMargin: '0px 0px -48px 0px' });
 
 document.querySelectorAll('.reveal').forEach((el, i) => {
-  el.style.transitionDelay = (i % 4) * 0.08 + 's';
+  el.style.transitionDelay = (i % 3) * 0.1 + 's';
   observer.observe(el);
 });
+
+// Nav activa por scroll
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 90) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.style.color = a.getAttribute('href') === '#' + current ? '#ffffff' : '';
+  });
+}, { passive: true });
 </script>
 </body>
 </html>
