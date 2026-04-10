@@ -140,8 +140,15 @@ nav {
 .nav-dropdown-menu a:hover { background: var(--accent-dim); color: var(--accent); }
 .nav-dropdown-menu a::after { display: none; }
 
+.nav-links a:active,
+.nav-links a:focus {
+  background: #e5e7eb; /* gris claro elegante */
+  color: var(--text);
+  border-radius: 6px;
+  padding: 4px 8px;
+}
+
 /* ════════════════════════════════
-   HERO — Rediseño completo
    Fondo oscuro con imagen tech + overlay
    RGB sutil en el título
    ════════════════════════════════ */
