@@ -1489,7 +1489,7 @@ footer::before {
         <strong>User Persona</strong> — Representación del usuario objetivo del sistema de clasificación.
       </div>
       <div style="text-align:center; margin-top:40px;">
-        <img src="User persona.png" style="width:100%; max-width:900px; border-radius:16px; box-shadow: var(--shadow-md);">
+        <img src="User persona.png" class="zoomable" style="width:100%; max-width:900px; border-radius:16px; box-shadow: var(--shadow-md);">
       </div>
     </div>
 
@@ -1769,7 +1769,7 @@ const lightbox = document.getElementById("lightbox");
 const lightboxImg = document.getElementById("lightbox-img");
 
 // Aplica a TODAS las imágenes dentro de carruseles y diagramas
-document.querySelectorAll(".carousel img, .diagram-placeholder img").forEach(img => {
+document.querySelectorAll(".carousel img, .diagram-placeholder img, .zoomable").forEach(img => {
   img.style.cursor = "zoom-in";
 
   img.addEventListener("click", () => {
