@@ -859,6 +859,42 @@ section { padding: 112px 0; }
 .placeholder-tab { text-align: center; padding: 96px 40px; }
 .placeholder-tab h3 { font-size: 40px; margin-bottom: 14px; opacity: 0.25; }
 
+.carousel img {
+  width: 100%;
+  max-width: 1100px;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+
+.carousel {
+  max-width: 1100px;
+  margin: 40px auto;
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.carousel-dots span {
+  width: 10px;
+  height: 10px;
+  background: #cbd5e1;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carousel-dots span.active {
+  background: var(--accent);
+  transform: scale(1.2);
+}
 /* ════════════════════════════════
    EVIDENCIA
    ════════════════════════════════ */
@@ -1189,7 +1225,7 @@ footer::before {
       </div>
     </div>
     <div class="diagram-placeholder reveal">
-      <p>📐 &nbsp; Diagrama del sistema / esquema de funcionamiento — <em>próximamente</em></p>
+      <img src="diagrama_bloques_tapitas.png" alt="Diagrama del sistema">
     </div>
   </div>
 </section>
@@ -1425,6 +1461,12 @@ footer::before {
         <img id="carousel-img" src="4 cuadrantes.png">
       <button onclick="nextSlide()">❯</button>
     </div>
+
+    <div class="carousel-dots" id="dots1">
+      <span onclick="goToSlide(0)"></span>
+      <span onclick="goToSlide(1)"></span>
+      <span onclick="goToSlide(2)"></span>
+    </div>
   </div>
 
   <div class="tab-content" id="tab-s4">
@@ -1433,8 +1475,12 @@ footer::before {
     </div>
     <div class="carousel">
       <button onclick="prevSlide2()">❮</button>
-      <img id="carousel-img2" src="proto1.jpg">
+      <img id="carousel-img2" src="Resol_Prototipo.png">
       <button onclick="nextSlide2()">❯</button>
+    </div>
+    <div class="carousel-dots" id="dots2">
+      <span onclick="goToSlide2(0)"></span>
+      <span onclick="goToSlide2(1)"></span>
     </div>
   </div>
     
@@ -1562,33 +1608,114 @@ window.addEventListener('scroll', () => {
   });
 }, { passive: true });
 
-// Carrusel mapa empatía
-let images = ["4 cuadrantes.png", "Pains&Gains.png", "4 cuadrantes.png"];
+// ==========================
+// CARRUSEL MAPA EMPATÍA
+// ==========================
+let images = ["4 cuadrantes.png", "Pains&Gains.png", "Insight.png"];
 let index = 0;
 
 function nextSlide() {
-  index = (index + 1) % images.length;
-  document.getElementById("carousel-img").src = images[index];
+  const img = document.getElementById("carousel-img");
+  img.style.opacity = 0;
+
+  setTimeout(() => {
+    index = (index + 1) % images.length;
+    img.src = images[index];
+    img.style.opacity = 1;
+    updateDots("dots1", index);
+  }, 200);
 }
 
 function prevSlide() {
-  index = (index - 1 + images.length) % images.length;
-  document.getElementById("carousel-img").src = images[index];
+  const img = document.getElementById("carousel-img");
+  img.style.opacity = 0;
+
+  setTimeout(() => {
+    index = (index - 1 + images.length) % images.length;
+    img.src = images[index];
+    img.style.opacity = 1;
+    updateDots("dots1", index);
+  }, 200);
 }
 
-// Carrusel prototipo
+function goToSlide(i) {
+  const img = document.getElementById("carousel-img");
+  img.style.opacity = 0;
+
+  setTimeout(() => {
+    index = i;
+    img.src = images[index];
+    img.style.opacity = 1;
+    updateDots("dots1", index);
+  }, 200);
+}
+
+
+// ==========================
+// CARRUSEL PROTOTIPO
+// ==========================
 let images2 = ["proto1.jpg", "proto2.jpg"];
 let index2 = 0;
 
 function nextSlide2() {
-  index2 = (index2 + 1) % images2.length;
-  document.getElementById("carousel-img2").src = images2[index2];
+  const img = document.getElementById("carousel-img2");
+  img.style.opacity = 0;
+
+  setTimeout(() => {
+    index2 = (index2 + 1) % images2.length;
+    img.src = images2[index2];
+    img.style.opacity = 1;
+    updateDots("dots2", index2);
+  }, 200);
 }
 
 function prevSlide2() {
-  index2 = (index2 - 1 + images2.length) % images2.length;
-  document.getElementById("carousel-img2").src = images2[index2];
+  const img = document.getElementById("carousel-img2");
+  img.style.opacity = 0;
+
+  setTimeout(() => {
+    index2 = (index2 - 1 + images2.length) % images2.length;
+    img.src = images2[index2];
+    img.style.opacity = 1;
+    updateDots("dots2", index2);
+  }, 200);
 }
+
+function goToSlide2(i) {
+  const img = document.getElementById("carousel-img2");
+  img.style.opacity = 0;
+
+  setTimeout(() => {
+    index2 = i;
+    img.src = images2[index2];
+    img.style.opacity = 1;
+    updateDots("dots2", index2);
+  }, 200);
+}
+
+
+// ==========================
+// DOTS (GENERAL)
+// ==========================
+function updateDots(containerId, activeIndex) {
+  const dots = document.querySelectorAll(`#${containerId} span`);
+  dots.forEach((dot, i) => {
+    dot.classList.toggle("active", i === activeIndex);
+  });
+}
+
+
+// ==========================
+// INICIO AUTOMÁTICO
+// ==========================
+window.onload = () => {
+  document.getElementById("carousel-img").src = images[0];
+  document.getElementById("carousel-img2").src = images2[0];
+
+  updateDots("dots1", 0);
+  updateDots("dots2", 0);
+};
+  
 </script>
 </body>
 </html>
