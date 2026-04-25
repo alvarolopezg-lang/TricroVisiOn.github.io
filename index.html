@@ -608,12 +608,22 @@ section { padding: 112px 0; }
   margin-top: 48px;
   border: 1.5px dashed var(--border2);
   border-radius: 20px;
-  padding: 72px 40px;
+  padding: 20px;
   text-align: center;
   background: var(--surface2);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.diagram-placeholder p { color: var(--muted2); font-size: 14px; }
+.diagram-placeholder img {
+  max-width: 100%;
+  max-height: 600px;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+}
 
 /* ════════════════════════════════
    EQUIPO
@@ -1118,6 +1128,37 @@ footer::before {
   border-radius: 10px;
   cursor: pointer;
 }
+
+/* ════════════════════════════════
+  IMAGEN FULLSCREEN
+   ════════════════════════════════ */
+
+#lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.85);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  cursor: zoom-out;
+}
+
+#lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 12px;
+  box-shadow: 0 0 40px rgba(0,0,0,0.6);
+  animation: zoomIn 0.3s ease;
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
   
 </style>
 </head>
@@ -1250,7 +1291,7 @@ footer::before {
         <div class="member-name">Alvaro Lopez Gastañaga</div>
         <div class="member-role">Líder del proyecto</div>
         <div class="member-carrera">Mecatrónica Industrial · 4° ciclo</div>
-        <p class="member-bio">Integración de los subsistemas mecánico y electrónico con enfoque en visión artificial.</p>
+        <p class="member-bio">Integración de los subsistemas mecánico, electrónico y algoritmos de clasificación con CV.</p>
       </div>
       <div class="member-card reveal">
         <div class="member-photo">A2</div>
@@ -1264,7 +1305,7 @@ footer::before {
         <div class="member-name">Moshe Igreda Bustinza</div>
         <div class="member-role">Programador</div>
         <div class="member-carrera">Mecatrónica Industrial · 4° ciclo</div>
-        <p class="member-bio">Enfocado en el desarrollo de algoritmos de clasificación y el control de actuadores. Responsable del firmware del sistema.</p>
+        <p class="member-bio">Enfocado en la programación de embebidos y el control de actuadores. Responsable del firmware del sistema.</p>
       </div>
     </div>
     <div class="equipo-bottom">
@@ -1715,7 +1756,39 @@ window.onload = () => {
   updateDots("dots1", 0);
   updateDots("dots2", 0);
 };
+
+// ==========================
+// LIGHTBOX (ZOOM IMÁGENES)
+// ==========================
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightbox-img");
+
+// Aplica a TODAS las imágenes dentro de carruseles y diagramas
+document.querySelectorAll(".carousel img, .diagram-placeholder img").forEach(img => {
+  img.style.cursor = "zoom-in";
+
+  img.addEventListener("click", () => {
+    lightbox.style.display = "flex";
+    lightboxImg.src = img.src;
+  });
+});
+
+// Cerrar al hacer click fuera
+lightbox.addEventListener("click", (e) => {
+  if (e.target !== lightboxImg) {
+    lightbox.style.display = "none";
+  }
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    lightbox.style.display = "none";
+  }
+});
   
 </script>
+
+  <div id="lightbox">
+    <img id="lightbox-img">
+  </div>
 </body>
 </html>
