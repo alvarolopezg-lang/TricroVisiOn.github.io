@@ -492,6 +492,10 @@ section { padding: 112px 0; }
   padding: 0 56px;
 }
 
+.container-wide {
+  max-width: 90%;
+}
+
 .divider {
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--border2) 25%, var(--border2) 75%, transparent);
@@ -937,10 +941,18 @@ section { padding: 112px 0; }
   overflow: hidden;
   transition: box-shadow 0.3s, border-color 0.3s, transform 0.3s;
   box-shadow: var(--shadow-sm);
+  pointer-events: auto;
 }
 
 .galeria-item:hover { box-shadow: var(--shadow-md); border-color: rgba(29,106,245,0.2); transform: translateY(-3px); }
 .galeria-item.featured { grid-column: span 2; }
+
+.galeria-item:hover,
+.galeria-item:focus-within {
+  box-shadow: var(--shadow-md);
+  border-color: rgba(29,106,245,0.2);
+  transform: translateY(-3px);
+}
 
 .galeria-label {
   position: absolute;
@@ -1250,7 +1262,7 @@ footer::before {
      SEMANAS
      ════════════════════════════════ -->
 <section id="semanas">
-  <div class="container">
+  <div class="container container-wide">
     <div class="reveal">
       <div class="section-label">Proceso de desarrollo</div>
       <h2 class="section-title">Evidencias</h2>
