@@ -106,7 +106,7 @@ nav {
 
 .nav-dropdown-menu {
   position: absolute;
-  top: 100%
+  top: calc(100% + 12px);
   left: 50%;
   transform: translateX(-50%) translateY(-6px);
   background: var(--surface);
@@ -140,14 +140,6 @@ nav {
 .nav-dropdown-menu a:hover { background: var(--accent-dim); color: var(--accent); }
 .nav-dropdown-menu a::after { display: none; }
 
-.nav-dropdown::after {
-  content: '';
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  height: 12px;
-}
 /* ════════════════════════════════
    Fondo oscuro con imagen tech + overlay
    RGB sutil en el título
@@ -500,10 +492,6 @@ section { padding: 112px 0; }
   padding: 0 56px;
 }
 
-.container-wide {
-  max-width: 90%;
-}
-
 .divider {
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--border2) 25%, var(--border2) 75%, transparent);
@@ -821,7 +809,7 @@ section { padding: 112px 0; }
   font-family: var(--font-display);
 }
 
-.integrante-body { display: grid; grid-template-columns: 1fr; }
+.integrante-body { display: grid; grid-template-columns: 1fr 1fr; }
 
 .integrante-img {
   aspect-ratio: 4/3;
@@ -841,19 +829,12 @@ section { padding: 112px 0; }
   height: 100%;
   object-fit: cover;
 }
-  
+
 .integrante-info {
   padding: 32px;
   display: flex;
   flex-direction: column;
   gap: 22px;
-}
-
-.img-ppt {
-  width: 70%;
-  max-width: 900px;
-  height: auto;
-  object-fit: contain;
 }
 
 .info-label {
@@ -956,18 +937,10 @@ section { padding: 112px 0; }
   overflow: hidden;
   transition: box-shadow 0.3s, border-color 0.3s, transform 0.3s;
   box-shadow: var(--shadow-sm);
-  pointer-events: auto;
 }
 
 .galeria-item:hover { box-shadow: var(--shadow-md); border-color: rgba(29,106,245,0.2); transform: translateY(-3px); }
 .galeria-item.featured { grid-column: span 2; }
-
-.galeria-item:hover,
-.galeria-item:focus-within {
-  box-shadow: var(--shadow-md);
-  border-color: rgba(29,106,245,0.2);
-  transform: translateY(-3px);
-}
 
 .galeria-label {
   position: absolute;
@@ -1277,7 +1250,7 @@ footer::before {
      SEMANAS
      ════════════════════════════════ -->
 <section id="semanas">
-  <div class="container container-wide">
+  <div class="container">
     <div class="reveal">
       <div class="section-label">Proceso de desarrollo</div>
       <h2 class="section-title">Evidencias</h2>
@@ -1409,7 +1382,7 @@ footer::before {
         <strong>User Persona</strong> — Representación del usuario objetivo del sistema de clasificación.
       </div>
       <div style="text-align:center; margin-top:40px;">
-        <img src="User persona.png" class="zoomable img-ppt" style="width:100%; max-width:900px; border-radius:16px; box-shadow: var(--shadow-md);">
+        <img src="User persona.png" class="zoomable" style="width:100%; max-width:900px; border-radius:16px; box-shadow: var(--shadow-md);">
       </div>
     </div>
 
@@ -1419,7 +1392,7 @@ footer::before {
     </div>
     <div class="carousel">
       <button onclick="prevSlide()">❮</button>
-        <img id="carousel-img" class="zoomable img-ppt" src="4 cuadrantes.png">
+        <img id="carousel-img" src="4 cuadrantes.png">
       <button onclick="nextSlide()">❯</button>
     </div>
 
@@ -1436,7 +1409,7 @@ footer::before {
     </div>
     <div class="carousel">
       <button onclick="prevSlide2()">❮</button>
-      <img id="carousel-img2" class="zoomable img-ppt" src="Resol_Prototipo.png">
+      <img id="carousel-img2" src="Resol_Prototipo.png">
       <button onclick="nextSlide2()">❯</button>
     </div>
     <div class="carousel-dots" id="dots2">
